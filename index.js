@@ -1,6 +1,6 @@
 import app from "./src/app.js";
 
-const PORT = 3000; 
+const PORT = 8080; 
 
 app.listen(PORT, () => {
   console.log(`App running in http://localhost:${PORT}`);
