@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1721591927314-70395",
+    "title": "Cámara Digital ABC",
+    "description": "Cámara digital ABC con lente de 24-70mm, 20MP de resolución y grabación de video en 4K.",
+    "code": "CAMABC2024",
+    "price": 999.99,
+    "status": true,
+    "stock": 30,
+    "category": "Electrodomésticos",
+    "thumbnails": [
+      "http://example.com/images/camera_abc_front.jpg",
+      "http://example.com/images/camera_abc_side.jpg"
+    ]
+  },
+  {
+    "id": "1721591952836-52884",
+    "title": "Auriculares Bluetooth DEF",
+    "description": "Auriculares Bluetooth DEF con cancelación de ruido activa, batería de 20 horas y diseño ergonómico.",
+    "code": "AURDEF2024",
+    "price": 149.99,
+    "status": true,
+    "stock": 75,
+    "category": "Accesorios",
+    "thumbnails": []
+  },
+  {
+    "id": "1721593217868-74458",
+    "title": "Smartphone Samsung S23+",
+    "description": "Smartphone Samsung S23+ con pantalla de 6.5 pulgadas, 128GB de almacenamiento y cámara de 48MP.",
+    "code": "SMARTXYZ2024",
+    "price": 699.99,
+    "status": true,
+    "stock": 53,
+    "category": "Electrónica",
+    "thumbnails": [
+      "http://example.com/images/smartphone_xyz_front.jpg",
+      "http://example.com/images/smartphone_xyz_back.jpg"
+    ]
+  }
+]
