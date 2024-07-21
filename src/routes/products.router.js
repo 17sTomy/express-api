@@ -2,6 +2,7 @@ import { Router } from "express";
 import ProductController from "../controllers/productController.js";
 
 const productsRouter = Router();
+
 const productController = new ProductController();
 
 productsRouter.get("/", (req, res) => productController.listProducts(req, res));

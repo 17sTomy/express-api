@@ -51,7 +51,6 @@ class ProductController {
 
   async listProduct(req, res) {
     const products = await this._readFile();
-
     const product = products.find((prod) => prod.id === req.params.pid);
 
     product
@@ -88,7 +87,6 @@ class ProductController {
 
   async updateProduct(req, res) {
     const products = await this._readFile();
-
     const index = products.findIndex((prod) => prod.id === req.params.pid);
 
     if (index !== -1) {
@@ -102,16 +100,15 @@ class ProductController {
 
   async deleteProduct(req, res) {
     let products = await this._readFile();
-
     const index = products.findIndex((prod) => prod.id === req.params.pid);
 
     if (index !== -1) {
-        products = products.filter(prod => prod.id !== req.params.pid)
-        await this._writeFile(products);
-        res.json({ "Success": "Product Deleted" });
-      } else {
-        res.status(404).json({ Error: "Product Not Found" });
-      }
+      products = products.filter((prod) => prod.id !== req.params.pid);
+      await this._writeFile(products);
+      res.json({ Success: "Product Deleted" });
+    } else {
+      res.status(404).json({ Error: "Product Not Found" });
+    }
   }
 }
 
