@@ -1,8 +1,6 @@
-import fs from "fs/promises";
 import path from "path";
-import { fileURLToPath } from "url";
+import { __dirname, readFile, writeFile, generateUniqueId } from "../utils/fileUtils.js";
 
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const data_path = path.join(__dirname, "../data/carts.json");
 
 class CartController {
@@ -11,33 +9,17 @@ class CartController {
   }
 
   async _readFile() {
-    try {
-      const data = await fs.readFile(this.filePath, "utf8");
-      return JSON.parse(data);
-    } catch (error) {
-      console.error("Error reading file:", error);
-      return [];
-    }
+    return await readFile(this.filePath);
   }
 
   async _writeFile(data) {
-    try {
-      await fs.writeFile(this.filePath, JSON.stringify(data, null, 2));
-    } catch (error) {
-      console.error("Error writing file:", error);
-    }
-  }
-
-  generateUniqueId() {
-    const timestamp = Date.now();
-    const randomPart = Math.floor(Math.random() * 100000);
-    return `${timestamp}-${randomPart}`;
+    await writeFile(this.filePath, data);
   }
 
   async createCart(req, res) {
     const carts = await this._readFile();
     const newCart = {
-      id: this.generateUniqueId(),
+      id: generateUniqueId(),
       products: [],
     };
     carts.push(newCart);

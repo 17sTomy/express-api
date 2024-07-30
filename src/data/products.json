@@ -37,5 +37,33 @@
       "http://example.com/images/smartphone_xyz_front.jpg",
       "http://example.com/images/smartphone_xyz_back.jpg"
     ]
+  },
+  {
+    "id": "1722381103745-76586",
+    "title": "Smartphone Samsung S24+",
+    "description": "Smartphone Samsung S24+ con pantalla de 6.5 pulgadas, 256GB de almacenamiento y cámara de 102MP.",
+    "code": "SMARTXYZ2025",
+    "price": 999.99,
+    "status": true,
+    "stock": 14,
+    "category": "Electrónica",
+    "thumbnails": [
+      "http://example.com/images/smartphone_xyz_front.jpg",
+      "http://example.com/images/smartphone_xyz_back.jpg"
+    ]
+  },
+  {
+    "id": "5dce19a9-d0c2-4891-9905-9f2f97d85ba2",
+    "title": "iPhone 4",
+    "description": "Reliquia telefónica",
+    "code": "CAMABC2024",
+    "price": 100,
+    "status": true,
+    "stock": 3,
+    "category": "Electrodomésticos",
+    "thumbnails": [
+      "http://example.com/images/camera_abc_front.jpg",
+      "http://example.com/images/camera_abc_side.jpg"
+    ]
   }
 ]
