@@ -92,6 +92,23 @@ class ProductController {
       res.status(404).json({ Error: "Product Not Found" });
     }
   }
+
+  async addProductSocket(product) {
+    const products = await this._readFile();
+    const newProduct = {
+      ...product,
+      id: generateUniqueId(),
+      status: true,
+    };
+    products.push(newProduct);
+    await this._writeFile(products);
+  }
+
+  async deleteProductSocket(productId) {
+    let products = await this._readFile();
+    products = products.filter((prod) => prod.id !== productId);
+    await this._writeFile(products);
+  }
 }
 
 export default ProductController;

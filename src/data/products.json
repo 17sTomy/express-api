@@ -9,7 +9,7 @@
     "stock": 30,
     "category": "Electrodomésticos",
     "thumbnails": [
-      "http://example.com/images/camera_abc_front.jpg",
+      "https://loremflickr.com/320/240/camera",
       "http://example.com/images/camera_abc_side.jpg"
     ]
   },
@@ -34,7 +34,7 @@
     "stock": 53,
     "category": "Electrónica",
     "thumbnails": [
-      "http://example.com/images/smartphone_xyz_front.jpg",
+      "https://loremflickr.com/320/240/samsung-galaxy",
       "http://example.com/images/smartphone_xyz_back.jpg"
     ]
   },
@@ -48,7 +48,7 @@
     "stock": 14,
     "category": "Electrónica",
     "thumbnails": [
-      "http://example.com/images/smartphone_xyz_front.jpg",
+      "https://loremflickr.com/320/240/samsung",
       "http://example.com/images/smartphone_xyz_back.jpg"
     ]
   },
@@ -62,8 +62,21 @@
     "stock": 3,
     "category": "Electrodomésticos",
     "thumbnails": [
-      "http://example.com/images/camera_abc_front.jpg",
+      "https://loremflickr.com/320/240/technology",
       "http://example.com/images/camera_abc_side.jpg"
     ]
+  },
+  {
+    "title": "Coca cola",
+    "description": "bebida",
+    "code": "coca-2132-ar",
+    "price": 2000,
+    "stock": 102,
+    "category": "Drinks",
+    "thumbnails": [
+      "https://www.coca-cola.com/content/dam/onexp/sv/es/brands/coca-cola/7840058006509.png"
+    ],
+    "id": "c055e002-1726-406d-92b4-1cb4299b728f",
+    "status": true
   }
 ]
