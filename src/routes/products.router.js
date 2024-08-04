@@ -5,9 +5,6 @@ const productsRouter = Router();
 
 const productController = new ProductController();
 
-productsRouter.get("/realtimeproducts", (req, res) => res.render("realTimeProducts"));
-productsRouter.get("/home", (req, res) => res.render("home"));
-
 productsRouter.get("/", (req, res) => productController.listProducts(req, res));
 productsRouter.get("/:pid", (req, res) => productController.listProduct(req, res));
 productsRouter.post("/", (req, res) => productController.addProduct(req, res));

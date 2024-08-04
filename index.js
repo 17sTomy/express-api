@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import app from "./src/app.js";
 import ProductController from "./src/controllers/productController.js";
-
+ 
 const PORT = 3000;
 
 const server = app.listen(PORT, () => {
