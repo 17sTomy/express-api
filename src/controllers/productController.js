@@ -108,7 +108,6 @@ class ProductController {
       res.status(500).json({ status: 'error', message: error.message });
     }
   }
-  
 
   async deleteProduct(req, res) {
     try {
