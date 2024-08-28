@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { engine } from "express-handlebars";
 import mongoose from "mongoose";
-import 'dotenv/config'
+import 'dotenv/config';
 import routes from "./routes/index.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));

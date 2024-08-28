@@ -1,5 +1,6 @@
 import path from "path";
 import { __dirname, readFile, writeFile, generateUniqueId } from "../utils/fileUtils.js";
+import ProductManager from "../managers/productManager.js";
 
 const data_path = path.join(__dirname, "../data/products.json");
 
@@ -17,38 +18,61 @@ class ProductController {
   }
 
   async listProducts(req, res) {
-    const products = await this._readFile();
-    let { limit } = req.query;
- 
-    if (limit) {
-      limit = parseInt(limit);
-      if (isNaN(limit) || limit < 1) {
-        return res.status(404).json({ Error: "Invalid limit parameter" });
-      }
-      res.json(products.slice(0, limit));
-    } else {
-      res.json(products);
+    try {
+      const { limit, page, sort, query } = req.query;
+
+      const result = await ProductManager.listProducts({ limit, page, sort, query });
+      const { docs: products, totalProducts, totalPages, page: currentPage, hasPrevPage, hasNextPage } = result;
+      
+      const baseUrl = `${req.protocol}://${req.get('host')}${req.baseUrl}`;
+      const buildLink = (pageNum) => {
+        const params = [];
+        if (limit !== undefined) params.push(`limit=${limit}`);
+        if (pageNum !== undefined) params.push(`page=${pageNum}`);
+        if (sort !== undefined) params.push(`sort=${sort}`);
+        if (query !== undefined) params.push(`query=${query}`);
+        return `${baseUrl}?${params.join('&')}`;
+      };
+
+      res.json({
+        status: 'success',
+        payload: products,
+        totalProducts,
+        totalPages,
+        prevPage: hasPrevPage ? currentPage - 1 : null,
+        nextPage: hasNextPage ? currentPage + 1 : null,
+        page: currentPage,
+        hasPrevPage,
+        hasNextPage,
+        prevLink: hasPrevPage ? buildLink(currentPage - 1) : null,
+        nextLink: hasNextPage ? buildLink(currentPage + 1) : null,
+      });
+    } catch (error) {
+      res.status(500).json({ status: 'error', message: error.message });
     }
   }
 
   async listProduct(req, res) {
-    const products = await this._readFile();
-    const product = products.find((prod) => prod.id === req.params.pid);
-
-    product
-      ? res.json(product)
-      : res.status(404).json({ Error: "Product Not Found" });
+    try {
+      const { pid } = req.params;
+      const product = await ProductManager.getProductById(pid);
+      if (!product) {
+        return res.status(404).json({ error: "Product Not Found" });
+      }
+      res.json(product);
+    } catch (error) {
+      res.status(500).json({ status: 'error', message: error.message });
+    }
   }
-
+  
   async addProduct(req, res) {
-    const { title, description, code, price, stock, category, thumbnails } =
-      req.body;
+    const { title, description, code, price, stock, category, thumbnails } = req.body;
 
     if (!title || !description || !code || !price || !stock || !category) {
       return res.status(400).send("All fields except thumbnails are required");
     }
 
-    const newProduct = {
+    const productData = {
       id: generateUniqueId(),
       title,
       description,
@@ -60,36 +84,45 @@ class ProductController {
       thumbnails: thumbnails || [],
     };
 
-    const products = await this._readFile();
-    products.push(newProduct);
-
-    await this._writeFile(products);
-    res.status(201).json(newProduct);
-  }
-
-  async updateProduct(req, res) {
-    const products = await this._readFile();
-    const index = products.findIndex((prod) => prod.id === req.params.pid);
-
-    if (index !== -1) {
-      products[index] = { ...products[index], ...req.body };
-      await this._writeFile(products);
-      res.json(products[index]);
-    } else {
-      res.status(404).json({ Error: "Product Not Found" });
+    try {
+      const result = await ProductManager.addProduct(productData);
+      res.status(201).json(result.product);
+    } catch (error) {
+      res.status(500).json({ status: 'error', message: error.message });
     }
   }
 
-  async deleteProduct(req, res) {
-    let products = await this._readFile();
-    const index = products.findIndex((prod) => prod.id === req.params.pid);
+  async updateProduct(req, res) {
+    try {
+      const { pid } = req.params;
+      const updateData = req.body;
 
-    if (index !== -1) {
-      products = products.filter((prod) => prod.id !== req.params.pid);
-      await this._writeFile(products);
-      res.json({ Success: "Product Deleted" });
-    } else {
-      res.status(404).json({ Error: "Product Not Found" });
+      const updatedProduct = await ProductManager.updateProduct(pid, updateData);
+  
+      if (!updatedProduct) {
+        return res.status(404).json({ error: "Product Not Found" });
+      }
+  
+      res.json(updatedProduct);
+    } catch (error) {
+      res.status(500).json({ status: 'error', message: error.message });
+    }
+  }
+  
+
+  async deleteProduct(req, res) {
+    try {
+      const { pid } = req.params;
+      const result = await ProductManager.deleteProduct(pid);
+      console.log(result);
+      
+      if (!result) {
+        return res.status(404).json({ error: "Product Not Found" });
+      }
+  
+      res.json({ success: "Product Deleted" });
+    } catch (error) {
+      res.status(500).json({ status: 'error', message: error.message });
     }
   }
 
