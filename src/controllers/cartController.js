@@ -15,7 +15,7 @@ class CartController {
     try {
       const cartId = req.params.cid;
       const result = await CartManager.listCartProducts(cartId);
-      res.json(result);
+      res.render('cart', { cart: result });
     } catch (error) {
       res.status(500).json({ status: 'error', message: error.message });
     }

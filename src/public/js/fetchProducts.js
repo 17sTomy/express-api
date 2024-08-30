@@ -113,7 +113,6 @@ async function checkCart() {
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
       
       if (response.ok) {
         const data = await response.json();
@@ -127,7 +126,7 @@ async function checkCart() {
     }
   }
 
-  cartIdElement.textContent = `Cart ID: ${cartId}`;
+  cartIdElement.innerHTML = `Cart ID: <a href='http://localhost:3000/api/carts/${cartId}'>${cartId}</a>`;
 }
 
 async function addToCart(cartId, productId) {

@@ -9,7 +9,13 @@ import routes from "./routes/index.js";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const app = express();
 
-app.engine("handlebars", engine());
+app.engine('handlebars', engine({
+  extname: 'handlebars',
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true
+  }
+}));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
