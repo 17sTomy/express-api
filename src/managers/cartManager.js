@@ -5,7 +5,7 @@ import { generateUniqueId } from "../utils/fileUtils.js";
 class CartManager {
   async createCart() {
     const newCart = new Cart({id: generateUniqueId(), products: []});
-    await newCart.save();
+    return await newCart.save();
   }
 
   async listCartProducts(cartId) {

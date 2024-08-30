@@ -71,16 +71,16 @@ form {
     margin-bottom: 15px;
 }
 
-.form-row > div {
+.form-row>div {
     flex: 1;
     margin: 0 10px;
 }
 
-.form-row > div:first-child {
+.form-row>div:first-child {
     margin-left: 0;
 }
 
-.form-row > div:last-child {
+.form-row>div:last-child {
     margin-right: 0;
 }
 
@@ -111,4 +111,21 @@ button:hover {
 
 input::placeholder {
     color: #888;
+}
+
+#pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#pagination-container .disabled {
+    pointer-events: none;
+    color: gray;
+    cursor: not-allowed;
+}
+
+#pagination-container .page-number {
+    font-weight: bold;
 }

@@ -1,21 +1,7 @@
-import path from "path";
-import { __dirname, readFile, writeFile, generateUniqueId } from "../utils/fileUtils.js";
+import { generateUniqueId } from "../utils/fileUtils.js";
 import ProductManager from "../managers/productManager.js";
 
-const data_path = path.join(__dirname, "../data/products.json");
-
 class ProductController {
-  constructor() {
-    this.filePath = data_path;
-  }
-
-  async _readFile() {
-    return await readFile(this.filePath);
-  }
-
-  async _writeFile(data) {
-    await writeFile(this.filePath, data);
-  }
 
   async listProducts(req, res) {
     try {
@@ -123,23 +109,6 @@ class ProductController {
     } catch (error) {
       res.status(500).json({ status: 'error', message: error.message });
     }
-  }
-
-  async addProductSocket(product) {
-    const products = await this._readFile();
-    const newProduct = {
-      ...product,
-      id: generateUniqueId(),
-      status: true,
-    };
-    products.push(newProduct);
-    await this._writeFile(products);
-  }
-
-  async deleteProductSocket(productId) {
-    let products = await this._readFile();
-    products = products.filter((prod) => prod.id !== productId);
-    await this._writeFile(products);
   }
 }
 

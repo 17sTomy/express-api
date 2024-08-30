@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 import app from "./src/app.js";
-import ProductController from "./src/controllers/productController.js";
+import ProductController from "./src/controllers/productController-file.js";
  
 const PORT = 3000;
 

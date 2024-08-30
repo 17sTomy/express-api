@@ -1,21 +1,6 @@
-import path from "path";
-import { __dirname, readFile, writeFile } from "../utils/fileUtils.js";
 import CartManager from "../managers/cartManager.js";
 
-const data_path = path.join(__dirname, "../data/carts.json");
-
 class CartController {
-  constructor() {
-    this.filePath = data_path;
-  }
-
-  async _readFile() {
-    return await readFile(this.filePath);
-  }
-
-  async _writeFile(data) {
-    await writeFile(this.filePath, data);
-  }
 
   async createCart(req, res) {
     try {
